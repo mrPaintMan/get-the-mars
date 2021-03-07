@@ -1,0 +1,24 @@
+{
+  "name": "get-the-mars",
+  "version": "1.0.0",
+  "description": "A simple 2D Phaser game.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrPaintMan/get-the-mars.git"
+  },
+  "author": "Filip Palmqvist",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrPaintMan/get-the-mars/issues"
+  },
+  "homepage": "https://github.com/mrPaintMan/get-the-mars#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "phaser": "^3.52.0"
+  }
+}
