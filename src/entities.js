@@ -15,7 +15,7 @@ class Chunk {
             ];
         });
         //const baddie = new Baddie(this.scene, x, y);
-        baddie.play("badWalkUp");
+        //baddie.play("badWalkUp");
         //this.scene.baddies.add(baddie);
     }
 
