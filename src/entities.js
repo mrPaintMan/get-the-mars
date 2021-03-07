@@ -4,7 +4,8 @@ class Chunk {
         this.x = x;
         this.y = y;
 
-        this.obstacles = this.scene.add.group();
+        this.obstacles = this.scene.physics.add.staticGroup();
+        this.scene.physics.add.collider(this.obstacles, this.scene.player)
         this.tiles = this.scene.add.group();
         this.isLoaded = false;
         this.obstacleCoords = Array.from(Array(20).keys()).map(_ => {
@@ -12,7 +13,10 @@ class Chunk {
                 Math.round(Math.random() * this.scene.chunkSize), 
                 Math.round(Math.random() * this.scene.chunkSize)
             ];
-        })
+        });
+        const baddie = new Baddie(this.scene, x, y);
+        baddie.play("badWalkUp");
+        this.scene.baddies.add(baddie);
     }
 
     unload() {
@@ -106,13 +110,50 @@ class Tile extends Phaser.GameObjects.Sprite {
     }
 }
 
-class Obstacle extends Phaser.GameObjects.Sprite {
+class Obstacle extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, key) {
         super(scene, x, y, key);
         this.tabIndex = 1
         this.scene = scene;
         this.scene.add.existing(this);
+        this.scene.physics.add.existing(this);
+        this.setDepth(0.2);
+        
         this.setOrigin(0);
+
+        if (key === "sprTree") {
+            this.setDepth(1);
+            this.setOrigin(0, 0.5);
+            this.scene.physics.add.collider(this, this.scene.player)
+            this.setImmovable(true)
+            this.body.setSize(16, 32, true)
+            this.body.setOffset(8, 24)
+        }
+        else if (key === "sprStone") {
+            this.setDepth(1);
+            this.scene.physics.add.collider(this, this.scene.player)
+            this.setImmovable(true)
+            this.body.setSize(16, 20, true)
+        }
+    }
+}
+
+class Bar extends Phaser.Physics.Arcade.Sprite {
+    constructor(scene, x, y) {
+        super(scene, x, y, "sprMars");
+        this.scene = scene;
+        this.scene.add.existing(this);
+        this.scene.physics.add.existing(this);
+        this.setDepth(2);
+    }
+}
+
+class Baddie extends Phaser.Physics.Arcade.Sprite {
+    constructor(scene, x, y) {
+        super(scene, x, y, "sprBadWalkUp");
+        this.scene = scene;
+        this.scene.add.existing(this);
+        this.scene.physics.add.existing(this);
         this.setDepth(1);
     }
 }
