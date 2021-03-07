@@ -14,9 +14,9 @@ class Chunk {
                 Math.round(Math.random() * this.scene.chunkSize)
             ];
         });
-        const baddie = new Baddie(this.scene, x, y);
+        //const baddie = new Baddie(this.scene, x, y);
         baddie.play("badWalkUp");
-        this.scene.baddies.add(baddie);
+        //this.scene.baddies.add(baddie);
     }
 
     unload() {
